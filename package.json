@@ -2,7 +2,8 @@
   "name": "tejas-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Tejas-Gopale.github.io/gt-portfolio",
+  "homepage": "https://github.com/Tejas-Gopale/portfolio.git",
+ 
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -19,6 +20,7 @@
     "webpack": "^5.96.1"
   },
   "scripts": {
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,6 +47,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0"
+    "gh-pages": "^6.3.0"
   }
 }
