@@ -1,0 +1,72 @@
+.project-heading {
+    text-align: center;
+    padding: 4rem 0 2rem;
+}
+
+.project-container {
+    max-width: 1140px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    padding-bottom: 5rem;
+}
+
+.prject-card {
+    background-color: #1a1a1a;
+    padding: 1.2rem 1rem;
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: transform 0.3s; /* Add transition for hover effect */
+}
+
+.prject-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.prject-card img {
+    width: 100%;
+    border-radius: 8px 8px 0 0; /* Round top corners of images */
+}
+
+.project-tital {
+    color: #fff;
+    padding: 1rem 0;
+    font-size: 1.5rem; /* Increase title font size */
+}
+
+.pro-details {
+    padding-bottom: 1rem;
+    font-size: 1.1rem;
+    text-align: justify;
+    color: #e0e0e0; /* Light gray text color for better readability */
+    line-height: 1.6; /* Increase line height for better readability */
+    margin: 1rem 0; /* Add margin for spacing */
+}
+
+.pro-btn {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.pro-btn .btn {
+    padding: 0.5rem;
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border-radius: 4px; /* Rounded button corners */
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.pro-btn .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+@media screen and (max-width: 740px) {
+    .project-container {
+        max-width: 90%;
+        margin: auto;
+        grid-template-columns: 1fr;
+    }
+}

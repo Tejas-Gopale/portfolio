@@ -1,0 +1,25 @@
+/* .resume{
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 1rem;
+    margin: auto;
+    max-width: 600px;
+} */
+
+/* ResumeViewerStyle.css */
+.resume {
+    display: flex;
+    padding-top:250px;
+    padding-bottom: 15%;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh;  
+    background-color: #000000;  
+  }
+  
+  canvas {
+    padding-top: 100px;
+    border: 1px solid #0a0a0a; 
+    max-width: 100%; 
+    height: auto;
+ }
