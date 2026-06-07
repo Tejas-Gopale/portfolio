@@ -1,67 +1,116 @@
-import { Link } from "react-router-dom";
-import "./NavbarStyle.css";
-import React from 'react'
-import { FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+// src/components/Navbar.js
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const [click , setClick] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  // for changing the Background Colour
-  const [color, setColor] = useState(false);
+  // Close mobile menu on route change or ESC key
+  useEffect(() => {
+    const handleEsc = (e) => { if (e.key === 'Escape') setMobileOpen(false); };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
 
-  const changecolour = () => {
-    if(window.scrollY >=100){
-      setColor(true);
-    }else{
-      setColor(false);
-    }
-  };
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
-  window.addEventListener("scroll",changecolour)
-  //function to hamburger funcunal 
-  const handleClick = () =>{  setClick(!click)  }
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/about', label: 'About' },
+    { path: '/contact', label: 'Contact' },
+  ];
 
   return (
-    <div className= { color ? "header header-bg":"header"}>
-        <Link to="/">
-            <h1>Tejas portfolio</h1>
-        </Link>
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-inner">
+          {/* Logo */}
+          <Link to="/" className="nav-logo" onClick={() => setMobileOpen(false)}>
+            <div className="nav-logo-mark">TG</div>
+            <span className="nav-logo-text">Tejas<span>.</span></span>
+          </Link>
 
-        <ul className= { click ? "nav-menu active" : "nav-menu" }>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          {/* Desktop Links */}
+          <div className="nav-links">
+            {navLinks.map(({ path, label }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                end={path === '/'}
+              >
+                {label}
+              </NavLink>
+            ))}
+          </div>
 
-          <li>
-            <Link to="/Project">Project</Link>
-          </li>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            {/* Status indicator */}
+            <div className="nav-status">
+              <div className="nav-status-dot" />
+              Available
+            </div>
 
-          <li>
-            <Link to="/About">About</Link>
-          </li>
+            <NavLink to="/contact" className="nav-cta">
+              Hire Me
+            </NavLink>
 
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-
-          {/* <li>
-            <Link to="/Resume">Resumes</Link>
-          </li> */}
-        </ul>
-
-        {/* hamnavagar menu  */}
-        <div className="hamburger" onClick={handleClick}>
-          { 
-            click ?
-               (<FaTimes size={20} style={{color: "#fff"}}/> ) 
-              : 
-               (<FaBars size={20} style={{color: "#fff"}}/>)
-          }
+            {/* Hamburger */}
+            <button
+              className={`hamburger ${mobileOpen ? 'open' : ''}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
-    </div>
-  )
-}
+      </nav>
 
-export default Navbar
+      {/* Mobile overlay */}
+      <div
+        className={`mobile-overlay ${mobileOpen ? 'open' : ''}`}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* Mobile menu */}
+      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
+        {navLinks.map(({ path, label }) => (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+            end={path === '/'}
+            onClick={() => setMobileOpen(false)}
+          >
+            {label}
+          </NavLink>
+        ))}
+        <NavLink
+          to="/contact"
+          className="btn-primary"
+          style={{ marginTop: '1rem', justifyContent: 'center' }}
+          onClick={() => setMobileOpen(false)}
+        >
+          Hire Me
+        </NavLink>
+      </div>
+    </>
+  );
+};
+
+export default Navbar;

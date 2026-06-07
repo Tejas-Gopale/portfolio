@@ -1,0 +1,28 @@
+/* src/routes/Contact.css */
+
+.contact-hero {
+  position: relative;
+  padding: 9rem 0 5rem;
+  overflow: hidden;
+}
+
+.contact-hero-content {
+  max-width: 700px;
+}
+
+.contact-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.contact-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+}
